@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WeightDataController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'graph')->name('create');
+        Route::post('/create', 'store')->name('post');
+    });
 });
