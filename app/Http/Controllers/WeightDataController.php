@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class WeightDataController extends Controller
 {
-    public function index()
-    {
-        $weight = weightData::latest()->first();
-        $date = \Carbon\Carbon::parse($weight->date ?? 0);
-        return view('weight.index', compact('weight', 'date'));
-    }
 
-    public function graph()
+
+    public function index()
     {
         $weights = weightData::orderBy('date', 'asc')->get();
         return view('weight.create', compact('weights'));
@@ -22,7 +17,9 @@ class WeightDataController extends Controller
 
     public function create()
     {
-        return view('/weight/create');
+        $weight = weightData::latest()->first();
+        $date = \Carbon\Carbon::parse($weight->date ?? 0);
+        return view('weight.index', compact('weight', 'date'));
     }
 
     public function store(Request $request)
@@ -32,6 +29,6 @@ class WeightDataController extends Controller
         $weight->weight = $request->input('weight');
         $weight->bodyfat = $request->input('bodyfat') ?? 0;
         $weight->save();
-        return redirect('/weight')->with('success', 'Weight added');
+        return redirect('/weight/create')->with('success', 'Weight added');
     }
 }
