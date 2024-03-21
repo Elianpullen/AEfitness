@@ -18,6 +18,8 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('friend', [FriendController::class, 'index'])->name('friend');
+    Route::get('friend/{id}/add', [FriendController::class, 'add'])->name('friend.add');
+    Route::get('friend/{id}/remove', [FriendController::class, 'remove'])->name('friend.remove');
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {
         Route::get('/', 'index')->name('index');
