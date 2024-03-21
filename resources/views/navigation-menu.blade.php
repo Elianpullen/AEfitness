@@ -21,6 +21,9 @@
                     <x-nav-link href="{{ route('weight.create') }}" :active="request()->routeIs('weight.create')">
                         {{ __('Create') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('friend') }}" :active="request()->routeIs('friend.index')">
+                        {{ __('Friends') }}
+                    </x-nav-link>
                 </div>
             </div>
 
