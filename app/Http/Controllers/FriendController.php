@@ -15,12 +15,17 @@ class FriendController extends Controller
         return view('friend.index', compact('friends', 'users'));
     }
 
-    public function add($friend_id)
+    public function request($friend_id)
     {
         $user = Auth::user();
         $friend = User::find($friend_id);
-        $user->friends()->attach($friend->id);
+        $user->friends()->attach($friend->id, ['status' => 'pending']);
         return redirect('/friend');
+    }
+
+    public function accept ()
+    {
+
     }
 
     public function remove($friend_id)
