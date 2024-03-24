@@ -10,8 +10,14 @@ class Friend extends Model
 {
     use HasFactory;
 
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
-    }
+//    protected $guarded = [
+//        'user_id',
+//        'friend_id',
+//        'status',
+//    ];
+
+//    public function users(): BelongsToMany
+//    {
+//        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
+//    }
 }
