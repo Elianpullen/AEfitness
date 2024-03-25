@@ -16,6 +16,13 @@ class FriendRequestController extends Controller
         $user = Auth::user();
         $receiver = User::find($friend_id);
 
+        $friendRequest = friendRequest::all()
+            ->where('sender_id', $friend_id)
+            ->where('receiver_id', $user->id);
+        if (empty($friendRequest)) // If true
+        {
+            dd('User already sent a friend request to you xD');
+        }
         $friendRequest = new friendRequest;
         $friendRequest->status = 'pending';
         $friendRequest->sender_id = $user->id;
@@ -24,39 +31,35 @@ class FriendRequestController extends Controller
         $friendRequest->save();
         return redirect('/friend');
     }
-
-    public function accept($friendRequestId)
+    public function cancel($friend_id)
     {
-//        $user = Auth::user();
-        $friendRequest = FriendRequest::findOrFail($friendRequestId);
+        $user = Auth::user();
+        $friendRequest = friendRequest::select()
+            ->where('sender_id', $user->id)
+            ->where('receiver_id', $friend_id);
+        $friendRequest->delete();
+        return redirect('/friend');
+    }
+
+    public function accept($sender_id)
+    {
+        $user = Auth::user();
+        $friendRequest = FriendRequest::where('sender_id', $sender_id)
+            ->where('receiver_id', $user->id)
+            ->first();
+
         $friendRequest->status = 'accepted';
         $friendRequest->accept_date = Carbon::now();
         $friendRequest->save();
         return redirect('/friend');
     }
-//
-//    public function accept($friend_id)
-//    {
-//        $user = Auth::user();
-//        $friend = User::find($friend_id);
-//
-//        Friend::where('friend_id', $friend->id)
-//            ->where('user_id', $user->id)
-//            ->update(['status' => "accepted"]);
-//
-//        return redirect('/friend');
-//    }
-//
-//    public function decline()
-//    {
-//
-//    }
-//
-//    public function remove($friend_id)
-//    {
-//        $user = Auth::user();
-//        $friend = User::find($friend_id);
-//        $user->friends()->detach($friend->id);
-//        return redirect('/friend');
-//    }
+    public function reject($sender_id)
+    {
+        $user = Auth::user();
+        $friendRequest = friendRequest::select()
+            ->where('sender_id', $sender_id)
+            ->where('receiver_id', $user->id);
+        $friendRequest->delete();
+        return redirect('/friend');
+    }
 }

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class friendRequest extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
     protected $fillable = [
         'status', 'sender_id', 'receiver_id', 'sent_date', 'accept_date'
     ];

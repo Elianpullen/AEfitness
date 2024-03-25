@@ -4,12 +4,7 @@
             {{ __('Friends') }}
         </h2>
     </x-slot>
-
-    <!-- TODO: table met alle users -->
     <!-- TODO: table met alle huidige vrienden -->
-    <!-- TODO: table met alle inkomende vriend verzoeken-->
-    <!-- TODO: table met alle uitgaande vriend verzoeken-->
-
     {{--All users--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -79,15 +74,7 @@
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
                                                     <a href="{{ url('/friend/' . $user->id . '/request') }}"
-                                                       class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full">Request</a>
-                                                    @php
-                                                        //                                                        $pendingRequests = auth()->user()->friendRequestsReceiver()
-                                                        //                                                ->where('status', 'pending')
-                                                        //                                                ->get();
-                                                        // if
-                                                        //                                                    if (auth()->user()-> )
-
-                                                    @endphp
+                                                       class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full">Add friend</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -101,7 +88,7 @@
             </div>
         </div>
     </div>
-    {{--Incoming friend requests--}}
+    {{--Received friend requests--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 py-10 rounded-lg">
@@ -109,8 +96,8 @@
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
-                                <h1 class="text-base font-semibold leading-6 text-white">Incoming friend requests</h1>
-                                <p class="mt-2 text-sm text-gray-300">A list of all incoming friend requests</p>
+                                <h1 class="text-base font-semibold leading-6 text-white">Received friend requests</h1>
+                                <p class="mt-2 text-sm text-gray-300">A list of all received friend requests</p>
                             </div>
                             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             </div>
@@ -138,26 +125,28 @@
                                         </thead>
                                         <tbody class="divide-y divide-gray-800">
                                         @php
-                                            $pendingRequests = auth()->user()->friendRequestsReceiver()
+                                            $receivedPendingRequests = auth()->user()->receivedFriendRequests()
                                             ->where('status', 'pending')
+                                            ->where('sender_id', '!=', auth()->user()->id)
+                                            ->where('receiver_id', '=', auth()->user()->id)
                                             ->get();
                                         @endphp
-                                        @foreach($pendingRequests as $pendingRequest)
+                                        @foreach($receivedPendingRequests as $receivedPendingRequest)
                                             <tr>
                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                    {{ $user->id }}
+                                                    {{ $receivedPendingRequest->id }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->name }}
+                                                    {{ $receivedPendingRequest->name }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->email }}
+                                                    {{ $receivedPendingRequest->email }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    <a href="{{ url('/friend/' . $user->id . '/accept') }}"
+                                                    <a href="{{ url('/friend/' . $receivedPendingRequest->id . '/accept') }}"
                                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Accept</a>
-                                                    <a href="{{ url('/friend/' . $user->id . '/decline') }}"
-                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Decline</a>
+                                                    <a href="{{ url('/friend/' . $receivedPendingRequest->id . '/reject') }}"
+                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Reject</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -171,7 +160,7 @@
             </div>
         </div>
     </div>
-    {{--Outgoing friend requests--}}
+    {{--Sent friend requests--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 py-10 rounded-lg">
@@ -179,8 +168,8 @@
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
-                                <h1 class="text-base font-semibold leading-6 text-white">Outgoing friend requests</h1>
-                                <p class="mt-2 text-sm text-gray-300">A list of all outgoing friend requests</p>
+                                <h1 class="text-base font-semibold leading-6 text-white">Sent friend requests</h1>
+                                <p class="mt-2 text-sm text-gray-300">A list of all sent friend requests</p>
                             </div>
                             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             </div>
@@ -191,10 +180,6 @@
                                     <table class="min-w-full divide-y divide-gray-700">
                                         <thead>
                                         <tr>
-                                            <th scope="col"
-                                                class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">
-                                                #
-                                            </th>
                                             <th scope="col"
                                                 class="px-3 py-3.5 text-left text-sm font-semibold text-white">Name
                                             </th>
@@ -208,27 +193,23 @@
                                         </thead>
                                         <tbody class="divide-y divide-gray-800">
                                         @php
-                                            $pendingRequests = auth()->user()->friendRequestsSender()
-//                                            ->where('status', 'pending')
-                                            ->toSql();
-                                            dd($pendingRequests)
+                                            $sendPendingRequests = auth()->user()->sentFriendRequests()
+                                            ->where('status', 'pending')
+                                            ->where('sender_id', '=', auth()->user()->id)
+                                            ->where('receiver_id', '!=', auth()->user()->id)
+                                            ->get();
                                         @endphp
-                                        @foreach($pendingRequests as $pendingRequest)
+                                        @foreach($sendPendingRequests as $sendPendingRequest)
                                             <tr>
-                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                    {{ $user->id }}
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                    {{ $sendPendingRequest->name }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->name }}
+                                                    {{ $sendPendingRequest->email }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->email }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    <a href="{{ url('/friend/' . $user->id . '/accept') }}"
-                                                       class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Accept</a>
-                                                    <a href="{{ url('/friend/' . $user->id . '/decline') }}"
-                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Decline</a>
+                                                    <a href="{{ url('/friend/' . $sendPendingRequest->id . '/cancel') }}"
+                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Cancel</a>
                                                 </td>
                                             </tr>
                                         @endforeach

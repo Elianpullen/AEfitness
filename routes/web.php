@@ -26,8 +26,9 @@ Route::middleware([
 
     Route::prefix('/friend')->name('friend.')->controller(FriendRequestController::class)->group(function () {
         Route::get('/{id}/request', 'request')->name('request');
+        Route::get('/{id}/cancel', 'cancel')->name('cancel');
         Route::get('/{id}/accept', 'accept')->name('accept');
-        Route::get('/{id}/remove', 'remove')->name('remove');
+        Route::get('/{id}/reject', 'reject')->name('reject');
     });
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {

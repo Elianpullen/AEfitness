@@ -63,18 +63,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-//    public function friends(): BelongsToMany
-//    {
-//        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
-//    }
-
-    public function friendRequestsSender(): BelongsToMany
+    public function sentFriendRequests(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'id');
+        return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'receiver_id')
+            ->withPivot('status')
+            ->withTimestamps();
     }
 
-    public function friendRequestsReceiver(): BelongsToMany
+    public function receivedFriendRequests(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'friend_requests', 'receiver_id', 'id');
+        return $this->belongsToMany(User::class, 'friend_requests', 'receiver_id', 'sender_id')
+            ->withPivot('status')
+            ->withTimestamps();
     }
 }
