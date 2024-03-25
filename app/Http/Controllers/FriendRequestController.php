@@ -21,16 +21,19 @@ class FriendRequestController extends Controller
             ->where('receiver_id', $user->id);
         if (empty($friendRequest)) // If true
         {
-            dd('User already sent a friend request to you xD');
+            $friendRequest = new friendRequest;
+            $friendRequest->status = 'pending';
+            $friendRequest->sender_id = $user->id;
+            $friendRequest->receiver_id = $receiver->id;
+            $friendRequest->sent_date = Carbon::now();
+            $friendRequest->save();
+        } else {
+            $this->accept($friend_id);
         }
-        $friendRequest = new friendRequest;
-        $friendRequest->status = 'pending';
-        $friendRequest->sender_id = $user->id;
-        $friendRequest->receiver_id = $receiver->id;
-        $friendRequest->sent_date = Carbon::now();
-        $friendRequest->save();
+
         return redirect('/friend');
     }
+
     public function cancel($friend_id)
     {
         $user = Auth::user();
@@ -53,6 +56,7 @@ class FriendRequestController extends Controller
         $friendRequest->save();
         return redirect('/friend');
     }
+
     public function reject($sender_id)
     {
         $user = Auth::user();
