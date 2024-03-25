@@ -22,7 +22,6 @@ Route::middleware([
 
     Route::prefix('/friend')->name('friend.')->controller(FriendController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/test', 'index')->name('test');
     });
 
     Route::prefix('/friend')->name('friend.')->controller(FriendRequestController::class)->group(function () {
