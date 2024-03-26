@@ -10,14 +10,4 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Friend extends Model
 {
     use HasFactory;
-
-    protected $guarded = [
-        'user_id',
-        'friend_id',
-    ];
-
-    public function users(): belongsTo
-    {
-        return $this->belongsTo(Friend::class);
-    }
 }

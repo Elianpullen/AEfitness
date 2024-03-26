@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('friend_id');
-            $table->unique(['user_id', 'friend_id']); // Is this correct? xD
-            $table->timestamps();
+            $table->unsignedBigInteger('friend_request_id');
+            $table->unique(['user_id', 'friend_request_id']);
 //            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 //            $table->foreign('friend_id')->references('id')->on('users')->onDelete('cascade');
         });
