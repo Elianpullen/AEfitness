@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
 {
     public function index()
     {
-        $friends = User::find(Auth::user()->id)->friends;
-        $users = User::all()->where('id', '!=', (Auth::user()->id));
-        return view('friend.index', compact('users', 'friends'));
+        $users = User::all();
+        $auth = auth()->user();
+
+        $friendRequestsSend = auth()->user()->friendRequestsSend()->with('sender')->get();
+        $friendRequestsReceived = auth()->user()->friendRequestsReceived()->with('receiver')->get();
+        $friends = auth()->user()->friends()->with('user')->get();
+
+        return view('friend.index', compact('friendRequestsSend', 'friendRequestsReceived', 'friends', 'users'));
     }
 }

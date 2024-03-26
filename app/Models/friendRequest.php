@@ -4,20 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class friendRequest extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
     protected $fillable = [
         'status', 'sender_id', 'receiver_id', 'sent_date', 'accept_date'
     ];
-    public function users(): BelongsToMany
+
+    public function sender() :hasOne
     {
-        return $this->belongsToMany(User::class, 'friends', 'friend_request_id', 'user_id');
-        // change pivot name: ->as('test');
-        // where pivot is: ->wherePivot('status', '=', 'accepted');
+        return $this->hasOne(User::class, 'id', 'sender_id');
+    }
+
+    public function receiver() :hasOne
+    {
+        return $this->hasOne(User::class, 'id', 'receiver_id');
     }
 }

@@ -13,14 +13,20 @@ class FriendRequestController extends Controller
 {
     public function request($friend_id)
     {
+        //        friendRequest::create([
+//            'status' => 'pending',
+//            'sender_id' => $auth->id,
+//            'receiver_id' => 1,
+//            'sent_date' => Carbon::now(),
+//        ]);
+
         $user = Auth::user();
         $receiver = User::find($friend_id);
 
         $friendRequest = friendRequest::get()
             ->where('sender_id', $friend_id)
             ->where('receiver_id', $user->id);
-        if ($friendRequest->isEmpty())
-        {
+        if ($friendRequest->isEmpty()) {
             $friendRequest = new friendRequest;
             $friendRequest->status = 'pending';
             $friendRequest->sender_id = $user->id;
