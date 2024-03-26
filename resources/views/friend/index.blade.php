@@ -4,7 +4,6 @@
             {{ __('Friends') }}
         </h2>
     </x-slot>
-    <!-- TODO: table met alle huidige vrienden -->
     {{--All users--}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,7 +13,63 @@
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
                                 <h1 class="text-base font-semibold leading-6 text-white">Users</h1>
-                                <p class="mt-2 text-sm text-gray-300">A list of all the users</p>
+                                <p class="mt-2 text-sm text-gray-300">A list of all your users</p>
+                            </div>
+                            <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                            </div>
+                        </div>
+                        <div class="mt-8 flow-root">
+                            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                    <table class="min-w-full divide-y divide-gray-700">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col"
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Name
+                                            </th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email
+                                            </th>
+                                            <th scope="col"
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Action
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-800">
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                    {{ $user->name }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                                                    {{ $user->email }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+{{--                                                    <a href="{{ url('/friend/' . $user->id . '/reject') }}"--}}
+{{--                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Reject</a>--}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--All friends--}}
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 py-10 rounded-lg">
+                <div class="mx-auto max-w-7xl">
+                    <div class="px-4 sm:px-6 lg:px-8">
+                        <div class="sm:flex sm:items-center">
+                            <div class="sm:flex-auto">
+                                <h1 class="text-base font-semibold leading-6 text-white">Friends</h1>
+                                <p class="mt-2 text-sm text-gray-300">A list of all the friends</p>
                             </div>
                             <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             </div>
@@ -30,51 +85,30 @@
                                                 #
                                             </th>
                                             <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Name
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">User#
                                             </th>
                                             <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Email
-                                            </th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Created
-                                                at
-                                            </th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Updated
-                                                at
-                                            </th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Status
-                                            </th>
-                                            <th scope="col"
-                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Action
+                                                class="px-3 py-3.5 text-left text-sm font-semibold text-white">Friend#
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-800">
-                                        @foreach($users as $user)
+                                        @dd($friends)
+                                        @foreach($friends as $friend)
+                                            @dd($friend)
                                             <tr>
                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                    {{ $user->id }}
+                                                    {{ $friend->id }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->name }}
+                                                    {{ $friend->user_id }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{ $user->email }}
+                                                    {{ $friend->friend_id }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{$user->created_at}}
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    {{$user->updated_at}}
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    (Pending/Accepted/Declined)
-                                                </td>
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                                                    <a href="{{ url('/friend/' . $user->id . '/request') }}"
-                                                       class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full">Add friend</a>
+                                                    <a href="{{ url('/friend/' . $friend->id . '/reject') }}"
+                                                       class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Reject</a>
                                                 </td>
                                             </tr>
                                         @endforeach

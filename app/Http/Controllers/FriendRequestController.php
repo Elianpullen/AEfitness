@@ -16,10 +16,10 @@ class FriendRequestController extends Controller
         $user = Auth::user();
         $receiver = User::find($friend_id);
 
-        $friendRequest = friendRequest::all()
+        $friendRequest = friendRequest::get()
             ->where('sender_id', $friend_id)
             ->where('receiver_id', $user->id);
-        if (empty($friendRequest)) // If true
+        if ($friendRequest->isEmpty())
         {
             $friendRequest = new friendRequest;
             $friendRequest->status = 'pending';
@@ -30,7 +30,6 @@ class FriendRequestController extends Controller
         } else {
             $this->accept($friend_id);
         }
-
         return redirect('/friend');
     }
 
@@ -54,6 +53,12 @@ class FriendRequestController extends Controller
         $friendRequest->status = 'accepted';
         $friendRequest->accept_date = Carbon::now();
         $friendRequest->save();
+
+        $friend = new Friend;
+        $friend->user_id = $user->id;
+        $friend->friend_id = $sender_id;
+        $friend->save();
+
         return redirect('/friend');
     }
 

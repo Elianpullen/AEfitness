@@ -11,7 +11,8 @@ class FriendController extends Controller
 {
     public function index()
     {
+        $friends = User::find(Auth::user()->id)->friends;
         $users = User::all()->where('id', '!=', (Auth::user()->id));
-        return view('friend.index', compact('users'));
+        return view('friend.index', compact('users', 'friends'));
     }
 }

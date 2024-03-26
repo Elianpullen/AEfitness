@@ -63,6 +63,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function sentFriendRequests(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'receiver_id')
@@ -75,5 +76,10 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'friend_requests', 'receiver_id', 'sender_id')
             ->withPivot('status')
             ->withTimestamps();
+    }
+
+    public function friends(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Friend::class);
     }
 }
