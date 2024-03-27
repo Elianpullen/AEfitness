@@ -16,10 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('weight.index') }}" :active="request()->routeIs('weight.index')">
-                        {{ __('Graph') }}
+                        {{ __('Weight graph') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('weight.create') }}" :active="request()->routeIs('weight.create')">
-                        {{ __('Create') }}
+                        {{ __('Weight create') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('friend.index') }}" :active="request()->routeIs('friend.index')">
                         {{ __('Friends') }}
