@@ -59,6 +59,11 @@ class FriendRequestController extends Controller
             'user_id' => $auth->id,
             'friend_id' => $friend_id,
         ]);
+
+        Friend::create([
+            'user_id' => $friend_id,
+            'friend_id' => $auth->id,
+        ]);
         return redirect('/friend');
     }
 
@@ -81,9 +86,18 @@ class FriendRequestController extends Controller
             ->where('friend_id', $friend_id)
             ->where('user_id', $auth->id);
         $friend->delete();
+
+        $friend = friend::select()
+            ->where('friend_id', $auth->id)
+            ->where('user_id', $friend_id);
+        $friend->delete();
         $friendRequest = friendRequest::select()
             ->where('sender_id', $friend_id)
             ->where('receiver_id', $auth->id);
+        $friendRequest->delete();
+        $friendRequest = friendRequest::select()
+            ->where('sender_id', $auth->id)
+            ->where('receiver_id', $friend_id);
         $friendRequest->delete();
         return redirect('/friend');
     }
