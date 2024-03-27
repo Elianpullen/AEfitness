@@ -11,13 +11,19 @@ class FriendController extends Controller
 {
     public function index()
     {
-        $users = User::all();
         $auth = auth()->user();
+        $users = User::all()->where('id', '!=', $auth->id);
 
-        $friendRequestsSend = auth()->user()->friendRequestsSend()->with('sender')->get();
-        $friendRequestsReceived = auth()->user()->friendRequestsReceived()->with('receiver')->get();
-        $friends = auth()->user()->friends()->with('user')->get();
+        $friendRequestsSend = $auth->friendRequestsSend()
+            ->with('sender')
+            ->where('status', 'pending')->get();
 
-        return view('friend.index', compact('friendRequestsSend', 'friendRequestsReceived', 'friends', 'users'));
+        $friendRequestsReceived = $auth->friendRequestsReceived()
+            ->with('receiver')
+            ->where('status', 'pending')->get();
+
+        $friends = $auth->friends()->with('user')->get();
+
+        return view('friend.index', compact('auth', 'users', 'friendRequestsSend', 'friendRequestsReceived', 'friends'));
     }
 }
