@@ -1,49 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Weight graph') }}
+            {{ __('Track weight') }}
         </h2>
     </x-slot>
 
-    @foreach($weights as $weight)
-        @php
-            // Convert string time to carbon
-            $date = \Carbon\Carbon::parse($weight->date);
-            $weightDate[] = $date->format('d/m/Y');
-            $weightData[] = $weight->weight;
-            if (!empty($weight->bodyfat)) {
-                $bodyfatData[] = $weight->bodyfat;
-                $bodyfatDate[] = $date->format('d/m/Y');
-            }
-        @endphp
-
-    @endforeach
-
-    <script>
-        var weightDate = {!! json_encode($weightDate) !!};
-        var weightData = {!! json_encode($weightData) !!};
-        var bodyfatData = {!! json_encode($bodyfatData) !!};
-        var bodyfatDate = {!! json_encode($bodyfatDate) !!};
-    </script>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="shadow-lg rounded-lg overflow-hidden">
-                    <div class="py-3 px-5 bg-gray-600">Weight(KG)</div>
-                    <canvas class="p-10" id="weightChartLine"></canvas>
-                </div>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">
+                <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>
+                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                    Date: {{$date->format('d F Y')}}</p>
+                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                    Weight: {{$weight->weight}}kg</p>
+                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                    Bodyfat: {{$weight->bodyfat}}%</p>
             </div>
-        </div>
-    </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="shadow-lg rounded-lg overflow-hidden">
-                    <div class="py-3 px-5 bg-gray-600">Bodyfat(%)</div>
-                    <canvas class="p-10" id="bodyfatChartLine"></canvas>
-                </div>
+            <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-xl rounded-b-lg">
+                <form action="{{ url('/weight/create') }}" method="POST" class="w-full max-w-lg p-4">
+                    @csrf
+                    <div class="flex-wrap -mx-3 mb-6 grid">
+                        {{--                        Date--}}
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                                class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
+                                for="grid-date">Date
+                                <input
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
+                                    id="date" name="date" type="date">
+                            </label>
+                        </div>
+                        {{--                        Bodyweight(kg)--}}
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                                class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
+                                for="grid-bodyweight">Bodyweight(kg)
+                                <input
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
+                                    id="grid-first-name" name="weight" type="text" placeholder="0">
+                            </label>
+                        </div>
+                        {{--                        Bodyfat(%)--}}
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                                class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
+                                for="grid-last-name">
+                                Bodyfat(%)
+                                <input
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-900"
+                                    id="grid-bodyfat" name="bodyfat" type="text" placeholder="0">
+                            </label>
+                        </div>
+                    </div>
+                    <button
+                        class="bg-blue-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" value="submit">
+                        Submit
+                    </button>
+                </form>
             </div>
         </div>
     </div>
