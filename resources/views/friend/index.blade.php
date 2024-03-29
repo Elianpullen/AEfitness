@@ -50,19 +50,27 @@
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-800">
-                                            @foreach ($users as $user)
+                                            @if ($users->count() == 0)
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->id}}</td>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->name}}</td>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->email}}</td>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->created_at}}</td>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->updated_at}}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                        <a href="{{ url('/friend/' . $user->id . '/request') }}"
-                                                           class="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full">Friend
-                                                            request</a></td>
+                                                        There are no others.
+                                                    </td>
                                                 </tr>
-                                            @endforeach
+                                            @else
+                                                @foreach ($users as $user)
+                                                    <tr>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->id}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->name}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->email}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->created_at}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$user->updated_at}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                                                            <a href="{{ url('/friend/' . $user->id . '/request') }}"
+                                                               class="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full">Friend
+                                                                request</a></td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -107,15 +115,23 @@
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-800">
-                                            @foreach($friends as $friend)
+                                            @if($friends->count() == 0)
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friend->user->name}}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                        <a href="{{ url('/friend/' . $friend->user->id . '/remove') }}"
-                                                           class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Remove</a>
+                                                        You don't have any friends..
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @else
+                                                @foreach($friends as $friend)
+                                                    <tr>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friend->user->name}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                                                            <a href="{{ url('/friend/' . $friend->user->id . '/remove') }}"
+                                                               class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -162,17 +178,25 @@
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-800">
-                                            @foreach($friendRequestsReceived as $friendRequestReceived)
+                                            @if($friendRequestsReceived->count() == 0)
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friendRequestReceived->sender->name}}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                        <a href="{{ url('/friend/' . $friendRequestReceived->sender->id . '/accept') }}"
-                                                           class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full">Accept</a>
-                                                        <a href="{{ url('/friend/' . $friendRequestReceived->sender->id . '/reject') }}"
-                                                           class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Reject</a>
+                                                        There are currently no pending friend requests.
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @else
+                                                @foreach($friendRequestsReceived as $friendRequestReceived)
+                                                    <tr>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friendRequestReceived->sender->name}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                                                            <a href="{{ url('/friend/' . $friendRequestReceived->sender->id . '/accept') }}"
+                                                               class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full">Accept</a>
+                                                            <a href="{{ url('/friend/' . $friendRequestReceived->sender->id . '/reject') }}"
+                                                               class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Reject</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -217,15 +241,23 @@
                                             </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-800">
-                                            @foreach($friendRequestsSend as $friendRequestSend)
+                                            @if($friendRequestsSend->count() == 0)
                                                 <tr>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friendRequestSend->receiver->name}}</td>
                                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
-                                                        <a href="{{ url('/friend/' . $friendRequestSend->receiver->id . '/cancel') }}"
-                                                           class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Cancel</a>
+                                                        There are currently no pending friend requests.
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @else
+                                                @foreach($friendRequestsSend as $friendRequestSend)
+                                                    <tr>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">{{$friendRequestSend->receiver->name}}</td>
+                                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0">
+                                                            <a href="{{ url('/friend/' . $friendRequestSend->receiver->id . '/cancel') }}"
+                                                               class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Cancel</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </div>
