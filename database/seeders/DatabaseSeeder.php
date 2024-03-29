@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         ($this->call([
-            WeightDataSeeder::class,
             UserSeeder::class,
         ]));
     }

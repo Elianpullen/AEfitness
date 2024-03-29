@@ -10,11 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">
                 <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>
                 <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Date: {{$date->format('d F Y')}}</p>
+                    Date: {{$date}}</p>
                 <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Weight: {{$weight->weight}}kg</p>
+                    Weight: {{$weight}}kg</p>
                 <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Bodyfat: {{$weight->bodyfat}}%</p>
+                    Bodyfat: {{$bodyfat}}%</p>
             </div>
 
             <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-xl rounded-b-lg">

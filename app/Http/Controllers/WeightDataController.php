@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\weightData;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,22 +16,26 @@ class WeightDataController extends Controller
         $weights = $auth->weights()->with('user')->orderBy('date', 'asc')->get();
         return view('weight.index', compact('weights'));
     }
+
     public function create()
     {
         $auth = Auth::user();
 
         $weight = $auth->weights()->with('user')->latest()->first();
 
-        if ($weight) {
-            $date = \Carbon\Carbon::parse($weight->date);
+        if (empty($weight)) {
+            $date = Carbon::now()->format('d F Y');
+            $weight = '69';
+            $bodyfat = '22';
         } else {
-            $weight = weightData::all()->where('user_id', 0)->first();
-            $date = \Carbon\Carbon::parse($weight->date);
+            $dateDB = $auth->weights()->latest()->value('date');
+            $date = \Carbon\Carbon::parse($dateDB)->format('d F Y');
+            $weight = $auth->weights()->latest()->value('weight');
+            $bodyfat = $auth->weights()->latest()->value('bodyfat');
         }
-
-        return view('weight.create', compact('weight', 'date'));
-
+        return view('weight.create', compact('weight', 'date', 'bodyfat'));
     }
+
     public function store(Request $request)
     {
         $auth = Auth::user();

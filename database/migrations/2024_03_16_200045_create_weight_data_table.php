@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('date');
+            $table->unique(['user_id', 'date']);
             $table->float('weight');
             $table->float('bodyfat');
             $table->timestamps();
