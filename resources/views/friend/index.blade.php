@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-900">
                 <div class="mx-auto max-w-7xl">
-                    <div class="bg-gray-800 py-10">
+                    <div class="bg-gray-800 py-10 rounded-lg">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">
@@ -25,6 +25,7 @@
                                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                         <table class="min-w-full divide-y divide-gray-700">
                                             <thead>
+
                                             <tr>
                                                 <th scope="col"
                                                     class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0">
@@ -78,7 +79,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-900">
                 <div class="mx-auto max-w-7xl">
-                    <div class="bg-gray-800 py-10">
+                    <div class="bg-gray-800 py-10 rounded-lg">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">
@@ -131,7 +132,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-900">
                 <div class="mx-auto max-w-7xl">
-                    <div class="bg-gray-800 py-10">
+                    <div class="bg-gray-800 py-10 rounded-lg">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">
@@ -188,7 +189,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-900">
                 <div class="mx-auto max-w-7xl">
-                    <div class="bg-gray-800 py-10">
+                    <div class="bg-gray-800 py-10 rounded-lg">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">

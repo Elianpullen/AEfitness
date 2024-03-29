@@ -27,7 +27,7 @@
                                 class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
                                 for="grid-date">Date
                                 <input
-                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-white border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
                                     id="date" name="date" type="date">
                             </label>
                         </div>
@@ -37,7 +37,7 @@
                                 class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
                                 for="grid-bodyweight">Bodyweight(kg)
                                 <input
-                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-white border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-900"
                                     id="grid-first-name" name="weight" type="text" placeholder="0">
                             </label>
                         </div>
@@ -48,7 +48,7 @@
                                 for="grid-last-name">
                                 Bodyfat(%)
                                 <input
-                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-900"
+                                    class="appearance-none block w-full bg-white dark:bg-gray-800 text-white border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-900"
                                     id="grid-bodyfat" name="bodyfat" type="text" placeholder="0">
                             </label>
                         </div>
