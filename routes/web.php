@@ -34,7 +34,9 @@ Route::middleware([
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/edit', 'edit')->name('edit');
         Route::get('/create', 'create')->name('create');
+
         Route::post('/create', 'store')->name('store');
     });
 });

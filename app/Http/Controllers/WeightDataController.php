@@ -36,6 +36,13 @@ class WeightDataController extends Controller
         return view('weight.create', compact('weight', 'date', 'bodyfat'));
     }
 
+    public function edit(weightData $weightData)
+    {
+        $auth = Auth::user();
+
+
+    }
+
     public function store(Request $request)
     {
         $auth = Auth::user();
