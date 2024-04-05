@@ -1,21 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Track weight') }}
+            {{ __('Edit weight') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">
-                <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Date: {{$date}}</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Weight: {{$weight}}kg</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Bodyfat: {{$bodyfat}}%</p>
-            </div>
+{{--            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">--}}
+{{--                <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>--}}
+{{--                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">--}}
+{{--                    Date: {{$date}}</p>--}}
+{{--                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">--}}
+{{--                    Weight: {{$weight}}kg</p>--}}
+{{--                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">--}}
+{{--                    Bodyfat: {{$bodyfat}}%</p>--}}
+{{--            </div>--}}
 
             <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-xl rounded-b-lg">
                 <form action="{{ url('/weight/create') }}" method="POST" class="w-full max-w-lg p-4">

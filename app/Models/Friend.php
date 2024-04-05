@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Friend extends Model
 {
     use HasFactory;
 
-    public function users(): BelongsToMany
+    protected $fillable = ['user_id', 'friend_id'];
+
+    public function user() :hasOne
     {
-        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'friend_id');
     }
 }
