@@ -16,6 +16,13 @@ class WeightDataController extends Controller
         $weights = $auth->weights()->with('user')->orderBy('date', 'asc')->get();
         return view('weight.index', compact('weights'));
     }
+    public function graph()
+    {
+        $auth = Auth::user();
+
+        $weights = $auth->weights()->with('user')->orderBy('date', 'asc')->get();
+        return view('weight.graph', compact('weights'));
+    }
 
     public function create()
     {
