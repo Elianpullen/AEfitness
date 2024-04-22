@@ -24,7 +24,7 @@
                 <form action="{{ url('/weight/create') }}" method="POST" class="w-full max-w-lg p-4">
                     @csrf
                     <div class="flex-wrap -mx-3 mb-6 grid">
-                        {{--                        Date--}}
+                        {{--Date--}}
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
                                 class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
@@ -34,7 +34,7 @@
                                     id="date" name="date" type="date">
                             </label>
                         </div>
-                        {{--                        Bodyweight(kg)--}}
+                        {{--Bodyweight(kg)--}}
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
                                 class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
@@ -44,7 +44,7 @@
                                     id="grid-first-name" name="weight" type="text" placeholder="0">
                             </label>
                         </div>
-                        {{--                        Bodyfat(%)--}}
+                        {{--Bodyfat(%)--}}
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label
                                 class="block uppercase tracking-wide text-gray-500 text-xs font-bold mb-2 dark:text-gray-400 leading-relaxed"
