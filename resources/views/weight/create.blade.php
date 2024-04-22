@@ -8,13 +8,16 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">
-                <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Date: {{$date}}</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Weight: {{$weight}}kg</p>
-                <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                    Bodyfat: {{$bodyfat}}%</p>
+                @if(empty($date) or empty($weight) )
+                @else
+                    <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last record:</p>
+                    <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                        Date: {{$date}}</p>
+                    <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                        Weight: {{$weight}}kg</p>
+                    <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                        Bodyfat: {{$bodyfat}}%</p>
+                @endif
             </div>
 
             <div class="bg-white dark:bg-gray-800 text-white overflow-hidden shadow-xl rounded-b-lg">
