@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\weightData;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,8 +11,8 @@ class WeightDataController extends Controller
     public function graph()
     {
         $auth = Auth::user();
-
         $weights = $auth->weights()->with('user')->orderBy('date', 'asc')->get(); // Oldest to newest
+
         return view('weight.graph', compact('weights'));
     }
 
@@ -23,8 +22,8 @@ class WeightDataController extends Controller
     public function index()
     {
         $auth = Auth::user();
-
         $weights = $auth->weights()->with('user')->orderBy('date', 'desc')->get(); // newest to oldest
+
         return view('weight.index', compact('weights'));
     }
 
@@ -39,6 +38,7 @@ class WeightDataController extends Controller
         $date = \Carbon\Carbon::parse($dateDB)->format('d F Y');
         $weight = $auth->weights()->latest()->value('weight');
         $bodyfat = $auth->weights()->latest()->value('bodyfat');
+
         return view('weight.create', compact('date', 'weight', 'bodyfat'));
     }
 
@@ -55,13 +55,14 @@ class WeightDataController extends Controller
             'weight' => $request->input('weight'),
             'bodyfat' => $request->input('bodyfat') ?? 0,
         ]);
+
         return redirect('/weight/create');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(weightDummyData $weightDummyData)
+    public function show()
     {
         //
     }
@@ -83,7 +84,6 @@ class WeightDataController extends Controller
     public function update(Request $request, $weightId)
     {
         $auth = Auth::user();
-
         $weights = $auth->weights()->with('user')->orderBy('date', 'desc')->get(); // newest to oldest
 
         $weightData = weightData::find($weightId);
@@ -106,6 +106,7 @@ class WeightDataController extends Controller
             ->where('user_id', $auth->id)
             ->where('id', $weightId);
         $weight->delete();
+
         return redirect('/weight');
     }
 }
