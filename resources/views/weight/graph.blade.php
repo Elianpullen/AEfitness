@@ -19,11 +19,11 @@
             @php
                 // Convert string time to carbon
                 $date = \Carbon\Carbon::parse($weight->date);
-                $weightDate[] = $date->format('d/m/Y');
+                $weightDate[] = $date->format('j F Y');
                 $weightData[] = $weight->weight;
                 if (!empty($weight->bodyfat)) {
                     $bodyfatData[] = $weight->bodyfat;
-                    $bodyfatDate[] = $date->format('d/m/Y');
+                    $bodyfatDate[] = $date->format('j F Y');
                 }
             @endphp
         @endforeach
