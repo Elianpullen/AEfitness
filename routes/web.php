@@ -3,8 +3,6 @@
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\WeightDataController;
-use App\Models\friendRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,8 +32,11 @@ Route::middleware([
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/graph', 'graph')->name('graph');
         Route::get('/create', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}/update', 'update')->name('update');
+        Route::get('/{id}/destroy', 'destroy')->name('destroy');
     });
 });

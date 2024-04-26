@@ -1,42 +1,37 @@
 import './bootstrap';
 
-// Weight chart
-const data = {
-    labels: weightDate,
-    datasets: [
-        {
-            label: "Weight(KG)",
-            backgroundColor: "hsl(252, 82.9%, 67.8%)",
-            borderColor: "hsl(252, 82.9%, 67.8%)",
-            data: weightData,
-        },
-    ],
-};
-const configLineChart = {
+// Weight Chart
+const weightChartConfig = {
     type: "line",
-    data,
-    options: {},
+    data: {
+        labels: weightDate,
+        datasets: [{
+            label: "Weight",
+            backgroundColor: "hsl(0, 70%, 42%)",
+            borderColor: "hsl(0, 70%, 42%)",
+            data: weightMeasurement,
+        }],
+    },
 };
-var chartLine = new Chart(
+const weightChart = new Chart(
     document.getElementById("weightChartLine"),
-    configLineChart
+    weightChartConfig
 );
 
 // Bodyfat Chart
 const bodyfatChartConfig = {
     type: "line",
     data: {
-        labels: bodyfatDate, // Assuming dateData is shared between weight and body fat charts
+        labels: bodyfatDate,
         datasets: [{
             label: "Body Fat",
-            backgroundColor: "hsl(252, 82.9%, 67.8%)",
-            borderColor: "hsl(252, 82.9%, 67.8%)",
-            data: bodyfatData,
+            backgroundColor: "hsl(0, 70%, 42%)",
+            borderColor: "hsl(0, 70%, 42%)",
+            data: bodyfatMeasurement,
         }],
     },
-    options: {}, // You can customize options as needed
 };
 const bodyFatChart = new Chart(
-    document.getElementById("bodyfatChartLine"), // Assuming you have an HTML element with id="bodyFatChartLine"
+    document.getElementById("bodyfatChartLine"),
     bodyfatChartConfig
 );
