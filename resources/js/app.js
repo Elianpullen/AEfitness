@@ -9,10 +9,9 @@ const weightChartConfig = {
             label: "Weight",
             backgroundColor: "hsl(0, 70%, 42%)",
             borderColor: "hsl(0, 70%, 42%)",
-            data: weightData,
+            data: weightMeasurement,
         }],
     },
-    options: {},
 };
 const weightChart = new Chart(
     document.getElementById("weightChartLine"),
@@ -28,10 +27,9 @@ const bodyfatChartConfig = {
             label: "Body Fat",
             backgroundColor: "hsl(0, 70%, 42%)",
             borderColor: "hsl(0, 70%, 42%)",
-            data: bodyfatData,
+            data: bodyfatMeasurement,
         }],
     },
-    options: {},
 };
 const bodyFatChart = new Chart(
     document.getElementById("bodyfatChartLine"),

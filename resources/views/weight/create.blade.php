@@ -9,6 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl rounded-t-lg">
                 @if(empty($date) or empty($weight) )
+
                 @else
                     <p class="px-3 py-2 font-bold text-gray-500 dark:text-gray-400 leading-relaxed">Last created record:</p>
                     <p class="px-3 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">

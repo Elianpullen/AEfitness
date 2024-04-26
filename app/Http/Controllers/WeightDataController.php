@@ -16,9 +16,6 @@ class WeightDataController extends Controller
         return view('weight.graph', compact('weights'));
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $auth = Auth::user();
@@ -27,9 +24,6 @@ class WeightDataController extends Controller
         return view('weight.index', compact('weights'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $auth = Auth::user();
@@ -42,9 +36,6 @@ class WeightDataController extends Controller
         return view('weight.create', compact('date', 'weight', 'bodyfat'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $auth = Auth::user();
@@ -59,27 +50,12 @@ class WeightDataController extends Controller
         return redirect('/weight/create');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($weightData)
     {
         $weight = weightData::find($weightData);
 
         return view('weight.edit', compact('weight'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
 
     public function update(Request $request, $weightId)
     {
@@ -95,9 +71,6 @@ class WeightDataController extends Controller
         return view('weight.index', compact('weights'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($weightId)
     {
         $auth = Auth::user();

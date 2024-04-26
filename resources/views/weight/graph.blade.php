@@ -7,8 +7,8 @@
 
     @php
         $weightDate = [];
-        $weightData = [];
-        $bodyfatData = [];
+        $weightMeasurement = [];
+        $bodyfatMeasurement = [];
         $bodyfatDate = [];
     @endphp
 
@@ -20,9 +20,9 @@
                 // Convert string time to carbon
                 $date = \Carbon\Carbon::parse($weight->date);
                 $weightDate[] = $date->format('j F Y');
-                $weightData[] = $weight->weight;
+                $weightMeasurement[] = $weight->weight;
                 if (!empty($weight->bodyfat)) {
-                    $bodyfatData[] = $weight->bodyfat;
+                    $bodyfatMeasurement[] = $weight->bodyfat;
                     $bodyfatDate[] = $date->format('j F Y');
                 }
             @endphp
@@ -31,8 +31,8 @@
 
     <script>
         var weightDate = {!! json_encode($weightDate) !!};
-        var weightData = {!! json_encode($weightData) !!};
-        var bodyfatData = {!! json_encode($bodyfatData) !!};
+        var weightMeasurement = {!! json_encode($weightMeasurement) !!};
+        var bodyfatMeasurement = {!! json_encode($bodyfatMeasurement) !!};
         var bodyfatDate = {!! json_encode($bodyfatDate) !!};
     </script>
 
