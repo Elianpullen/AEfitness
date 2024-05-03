@@ -11,7 +11,7 @@
                 <div class="mx-auto max-w-7xl">
                     <div class="bg-gray-800 py-10 rounded-lg">
                         <div class="px-4 sm:px-6 lg:px-8">
-                            <div class="sm:flex sm:items-center justify-center">
+                            <div class="sm:flex sm:items-center">
                                 <form class="max-w-md mx-auto" action="{{ url('/friend/search') }}" method="GET">
                                     <label for="default-search"
                                            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -25,8 +25,8 @@
                                                       d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                             </svg>
                                         </div>
-                                        <input type="search" id="default-search"
-                                               class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        <input type="search" name="username"
+                                               class="block w-full p-4 mr-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                placeholder="Search user" required/>
                                         <button type="submit"
                                                 class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -35,13 +35,29 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="mt-8 flow-root">
-                                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-
-                                    </div>
-                                </div>
-                            </div>
+                            {{$results = session('results')}}
+                            @if ($results)
+                                @foreach($results as $result)
+                                    <ul role="list" class="divide-y divide-gray-100">
+                                        <li class="flex items-center justify-between gap-x-6 py-5">
+                                            <div class="flex min-w-0 gap-x-4">
+                                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                                                     src="{{$result->profile_photo_path}}"
+                                                     alt="">
+                                                <div class="min-w-0 flex-auto">
+                                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{$result->name}}</p>
+                                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{$result->email}}</p>
+                                                </div>
+                                            </div>
+                                            <a href="{{ url('/friend/' . $result->id . '/request') }}"
+                                               class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Add</a>
+                                        </li>
+                                    </ul>
+                                @endforeach
+                            @endif
+                            {{--                                <a href="#"--}}
+                            {{--                                   class="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">View--}}
+                            {{--                                    all</a>--}}
                         </div>
                     </div>
                 </div>

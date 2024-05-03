@@ -28,6 +28,7 @@ Route::middleware([
         Route::get('/{id}/accept', 'accept')->name('accept');
         Route::get('/{id}/reject', 'reject')->name('reject');
         Route::get('/{id}/remove', 'remove')->name('remove');
+        Route::get('/search', 'search')->name('search');
     });
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {

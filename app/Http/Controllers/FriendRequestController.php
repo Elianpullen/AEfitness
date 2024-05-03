@@ -101,4 +101,12 @@ class FriendRequestController extends Controller
         $friendRequest->delete();
         return redirect('/friend');
     }
+
+    public function search(Request $request)
+    {
+        $name = $request->input('username');
+
+        $results = User::all()->where('name', $name);
+        return redirect('/friend')->with(compact('results'));
+    }
 }
