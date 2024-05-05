@@ -105,8 +105,7 @@ class FriendRequestController extends Controller
     public function search(Request $request)
     {
         $name = $request->input('username');
-
-        $results = User::all()->where('name', $name);
-        return redirect('/friend')->with(compact('results'));
+        $results = User::search($name)->get();
+        return view('friend.index')->with(compact('results'));
     }
 }

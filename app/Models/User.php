@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
@@ -18,6 +18,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -63,19 +64,36 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        return array_merge($this->toArray(), [
+            'id' => (string)$this->id,
+            'created_at' => $this->created_at->timestamp,
+        ]);
+    }
+
     public function friendRequestsSend(): hasMany
     {
         return $this->hasMany(FriendRequest::class, 'sender_id');
     }
+
     public function friendRequestsReceived(): hasMany
     {
         return $this->hasMany(FriendRequest::class, 'receiver_id');
     }
-    public function friends() :hasMany
+
+    public function friends(): hasMany
     {
         return $this->hasMany(Friend::class, 'user_id');
     }
-    public function weights() :hasMany
+
+    public function weights(): hasMany
     {
         return $this->hasMany(weightData::class, 'user_id');
     }
