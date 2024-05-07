@@ -6,7 +6,6 @@ use App\Models\Friend;
 use App\Models\friendRequest;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class FriendRequestController extends Controller
@@ -100,12 +99,5 @@ class FriendRequestController extends Controller
             ->where('receiver_id', $friend_id);
         $friendRequest->delete();
         return redirect('/friend');
-    }
-
-    public function search(Request $request)
-    {
-        $name = $request->input('username');
-        $results = User::search($name)->get();
-        return view('friend.index')->with(compact('results'));
     }
 }

@@ -20,6 +20,7 @@ Route::middleware([
 
     Route::prefix('/friend')->name('friend.')->controller(FriendController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/search', 'search')->name('search');
     });
 
     Route::prefix('/friend')->name('friend.')->controller(FriendRequestController::class)->group(function () {
@@ -28,7 +29,6 @@ Route::middleware([
         Route::get('/{id}/accept', 'accept')->name('accept');
         Route::get('/{id}/reject', 'reject')->name('reject');
         Route::get('/{id}/remove', 'remove')->name('remove');
-        Route::get('/search', 'search')->name('search');
     });
 
     Route::prefix('/weight')->name('weight.')->controller(WeightDataController::class)->group(function () {
