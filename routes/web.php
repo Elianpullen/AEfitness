@@ -20,7 +20,7 @@ Route::middleware([
 
     Route::prefix('/friend')->name('friend.')->controller(FriendController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/search', 'search')->name('search');
+        Route::get('/search', 'index')->name('index');
     });
 
     Route::prefix('/friend')->name('friend.')->controller(FriendRequestController::class)->group(function () {
