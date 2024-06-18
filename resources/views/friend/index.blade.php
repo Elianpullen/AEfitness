@@ -365,7 +365,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="-mt-px flex divide-x divide-gray-200">
-                                                    if user is already friends
+                                                    {{--if user is already friends--}}
                                                     @if($friends->contains('user_id', $result->id) or $friends->contains('friend_id', $result->id))
                                                         <div class="flex w-0 flex-1">
                                                             <a href="{{ url('/friend/' . $result->id . '/remove') }}"
@@ -384,24 +384,26 @@
                                                                 Remove
                                                             </a>
                                                         </div>
+                                                        {{-- If a friend request has already been send --}}
                                                     @elseif($friendRequestsSend->contains('receiver_id', $result->id) and $friendRequestsSend->contains('status', 'pending'))
                                                         <div class="-ml-px flex w-0 flex-1">
-                                                            <a href="{{ url('/friend/' . $result->id . '/remove') }}"
+                                                            <a href="{{ url('/friend/' . $result->id . '/cancel') }}"
                                                                class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                      height="24" viewBox="0 0 24 24" fill="none"
                                                                      stroke="currentColor" stroke-width="2"
                                                                      stroke-linecap="round" stroke-linejoin="round"
-                                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
+                                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-user-minus">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                                     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
+                                                                    <path
+                                                                        d="M6 21v-2a4 4 0 0 1 4 -4h4c.348 0 .686 .045 1.009 .128"/>
                                                                     <path d="M16 19h6"/>
-                                                                    <path d="M19 16v6"/>
-                                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4"/>
                                                                 </svg>
-                                                                Decline
+                                                                Cancel
                                                             </a>
                                                         </div>
+                                                        {{-- If a friend request has already been received --}}
                                                     @elseif($friendRequestsReceived->contains('sender_id', $result->id) and $friendRequestsReceived->contains('status', 'pending'))
                                                         <div class="flex w-0 flex-1">
                                                             <a href="{{ url('/friend/' . $result->id . '/accept') }}"
@@ -421,7 +423,7 @@
                                                             </a>
                                                         </div>
                                                         <div class="-ml-px flex w-0 flex-1">
-                                                            <a href="{{ url('/friend/' . $result->id . '/remove') }}"
+                                                            <a href="{{ url('/friend/' . $result->id . '/reject') }}"
                                                                class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                      height="24" viewBox="0 0 24 24" fill="none"
@@ -439,18 +441,18 @@
                                                         </div>
                                                     @else
                                                         <div class="flex w-0 flex-1">
-                                                            <a href="{{ url('/friend/' . $result->id . '/accept') }}"
+                                                            <a href="{{ url('/friend/' . $result->id . '/request') }}"
                                                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                      height="24" viewBox="0 0 24 24" fill="none"
                                                                      stroke="currentColor" stroke-width="2"
                                                                      stroke-linecap="round" stroke-linejoin="round"
-                                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-user-minus">
+                                                                     class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                                     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
-                                                                    <path
-                                                                        d="M6 21v-2a4 4 0 0 1 4 -4h4c.348 0 .686 .045 1.009 .128"/>
                                                                     <path d="M16 19h6"/>
+                                                                    <path d="M19 16v6"/>
+                                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4"/>
                                                                 </svg>
                                                                 Add
                                                             </a>
