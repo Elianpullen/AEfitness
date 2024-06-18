@@ -12,9 +12,7 @@
         $bodyfatDate = [];
     @endphp
 
-    @if($weights->isEmpty())
-        {{ $weight = App\Models\weightData::where('user_id', 0)->first() }}
-    @else
+    @if($weights->isNotEmpty())
         @foreach($weights as $weight)
             @php
                 // Convert string time to carbon
